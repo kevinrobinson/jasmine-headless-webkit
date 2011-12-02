@@ -63,6 +63,7 @@ module Jasmine
           RUNNER,
           @options[:colors] ? '-c' : nil,
           @options[:report] ? "-r #{@options[:report]}" : nil,
+          @options[:seed] ? "-s #{@options[:seed]}" : nil
           *targets
         ].compact.join(" ")
       end
