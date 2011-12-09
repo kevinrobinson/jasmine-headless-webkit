@@ -20,9 +20,13 @@ Runner::Runner() : QObject()
   , useColors(false)
   {
   page.settings()->enablePersistentStorage();
+  //kr start:
+  page.settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+  //kr end
   ticker.setInterval(TIMER_TICK);
 
   connect(&ticker, SIGNAL(timeout()), this, SLOT(timerEvent()));
+  //kr comment:
   connect(&page, SIGNAL(loadFinished(bool)), this, SLOT(watch(bool)));
   connect(&page, SIGNAL(handleError(const QString &, int, const QString &)), this, SLOT(handleError(const QString &, int, const QString &)));
   connect(page.mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(addJHW()));
